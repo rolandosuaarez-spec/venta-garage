@@ -740,8 +740,15 @@
     line-height: 1;
     cursor: pointer;
     color: var(--ink-soft);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
   }
-  .cart-header button:hover{ color: var(--tape); }
+  .cart-header button:hover{ color: var(--tape); background: rgba(0,0,0,.06); }
 
   .cart-items{
     flex: 1;
@@ -1149,6 +1156,17 @@
     </div>
   </aside>
 
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="lightbox-overlay" role="dialog" aria-modal="true">
+    <div class="lb-content">
+      <button class="lightbox-close" id="lb-close" aria-label="Cerrar">&times;</button>
+      <button class="lightbox-nav lb-prev" id="lb-prev" aria-label="Anterior">&#8249;</button>
+      <div class="lightbox-inner" id="lb-inner"></div>
+      <button class="lightbox-nav lb-next" id="lb-next" aria-label="Siguiente">&#8250;</button>
+      <div class="lightbox-counter" id="lb-counter"></div>
+    </div>
+  </div>
+
 <script>
   /* ============================================================
      LISTA DE ARTÍCULOS
@@ -1394,6 +1412,9 @@
     const ids = Object.keys(carrito);
     if (ids.length === 0) return;
 
+    // cerrar el carrito antes de abrir el modal
+    cerrarCarrito();
+
     // eliminar modal previo si existe
     const prev = document.getElementById('precio-overlay');
     if (prev) prev.remove();
@@ -1411,7 +1432,7 @@
     const overlay = document.createElement('div');
     overlay.id = 'precio-overlay';
     overlay.style.cssText = `
-      position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;
+      position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;
       display:flex;align-items:center;justify-content:center;padding:1rem;
     `;
 
@@ -2148,17 +2169,6 @@
   document.getElementById('cart-checkout').addEventListener('click', enviarPedidoPorWhatsapp);
   renderCarrito();
 </script>
-
-  <!-- LIGHTBOX -->
-  <div id="lightbox" class="lightbox-overlay" role="dialog" aria-modal="true">
-    <div class="lb-content">
-      <button class="lightbox-close" id="lb-close" aria-label="Cerrar">&times;</button>
-      <button class="lightbox-nav lb-prev" id="lb-prev" aria-label="Anterior">&#8249;</button>
-      <div class="lightbox-inner" id="lb-inner"></div>
-      <button class="lightbox-nav lb-next" id="lb-next" aria-label="Siguiente">&#8250;</button>
-      <div class="lightbox-counter" id="lb-counter"></div>
-    </div>
-  </div>
 
 </body>
 </html>
