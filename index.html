@@ -1185,12 +1185,12 @@
     { id: 'Barra-bebidas',   categoria: 'sala',       titulo: 'Barra bebidas',               precio: '$3,800',             precioNum: 3800,  original: null,    medidas: '1.50 m largo · 1.02 m alto · 0.62 m profundidad', descripcion: 'Elegante carrito para bebidas con inserto de aluminio (mueble). La parte superior mide 0.31 m de alto y 0.25 m de profundidad; es desmontable, reforzada y tiene ruedas para fácil transportación.', fotos: 3, video: false, estado: 'disponible', stock: 1 },
     { id: 'Mueble-para-TV',  categoria: 'sala',       titulo: 'Mueble para TV',              precio: '$600',               precioNum: 600,   original: null,    medidas: '', descripcion: '', fotos: 3, video: false, estado: 'disponible', stock: 1 },
     { id: 'Mesas-de-centro', categoria: 'sala',       titulo: 'Mesas de centro (las 3)',     precio: '$800 el set',         precioNum: 800,   original: null,    medidas: '', descripcion: 'Las 3 mesas se venden juntas por $800.', fotos: 3, video: false, estado: 'disponible', stock: 1 },
-    { id: 'Sofá-cama',       categoria: 'sala',       titulo: 'Sofá cama',                   precio: '$4,500',             precioNum: 4500,  original: null,    medidas: '1.90 m × 0.83 m', descripcion: '', fotos: 3, video: false, estado: 'disponible', stock: 1 },
+    { id: 'Sofa-cama',       categoria: 'sala',       titulo: 'Sofá cama',                   precio: '$4,500',             precioNum: 4500,  original: null,    medidas: '1.90 m × 0.83 m', descripcion: '', fotos: 3, video: false, estado: 'disponible', stock: 1 },
     { id: 'Escritorio',      categoria: 'oficina',    titulo: 'Escritorio',                  precio: '$800',               precioNum: 800,   original: null,    medidas: '', descripcion: '', fotos: 4, video: false, estado: 'disponible', stock: 1 },
     { id: 'Computadora-de-escritorio', categoria: 'oficina', titulo: 'Computadora de escritorio', precio: '$2,000', precioNum: 2000, original: null, medidas: '', descripcion: '', fotos: 4, video: false, estado: 'disponible', stock: 1 },
     { id: 'Sillas-de-escritorio', categoria: 'oficina', titulo: 'Sillas de escritorio',      precio: '$600 c/u',           precioNum: 600,   original: null,    medidas: '', descripcion: '', fotos: 2, video: false, estado: 'disponible', stock: 2 },
     { id: 'pantalla-bety',   categoria: 'electronica', titulo: 'Smart TV TCL 55" · Roku TV',           precio: '$4,000',             precioNum: 4000,  original: null,    medidas: '55 pulgadas', descripcion: 'TCL 55" con Roku TV integrado. Smart TV con acceso a Netflix, Disney+, YouTube y más sin necesidad de dispositivos extra.', fotos: 3, video: false, estado: 'disponible', stock: 1 },
-    { id: 'Pantalla-de-Mamá', categoria: 'electronica', titulo: 'Smart TV 32" JVC', precio: '$1,500',            precioNum: 1500,  original: null,    medidas: '32 pulgadas', descripcion: 'JVC 32" Smart TV. Tiene App Store, Netflix, Deportes, Películas, Música y más. Incluye soporte de pared. En buen estado.', fotos: 3, video: false, estado: 'disponible', stock: 1 },
+    { id: 'Pantalla-de-Mama', categoria: 'electronica', titulo: 'Smart TV 32" JVC', precio: '$1,500',            precioNum: 1500,  original: null,    medidas: '32 pulgadas', descripcion: 'JVC 32" Smart TV. Tiene App Store, Netflix, Deportes, Películas, Música y más. Incluye soporte de pared. En buen estado.', fotos: 3, video: false, estado: 'disponible', stock: 1 },
     { id: 'Celulares',       categoria: 'electronica', titulo: 'Celulares',                  precio: '$3,000 c/u',         precioNum: 3000,  original: null,    medidas: '', descripcion: '', fotos: 5, video: false, estado: 'disponible', stock: 2 },
     { id: 'Buros-y-cabecera', categoria: 'recamara',   titulo: 'Burós y cabecera',            precio: '$3,800',             precioNum: 3800,  original: null,    medidas: '2m × 1.60m × 11cm · Cabecera', descripcion: '', fotos: 3, video: false, estado: 'disponible', stock: 1 },
     { id: 'Lampara-de-pestanas', categoria: 'recamara', titulo: 'Lámpara de pestañas',       precio: '$1,000',             precioNum: 1000,  original: null,    medidas: '', descripcion: '', fotos: 6, video: false, estado: 'disponible', stock: 1 },
@@ -1875,12 +1875,12 @@
 
   // ---- CARRUSEL UNIFICADO: fotos + video Pantalla de Mamá JVC 32" ----
   (function embebeMama() {
-    const SLIDES_MAMÁ = [
-      { type: 'img', src: 'fotos/Pantalla-de-Mamá-1.webp' },
-      { type: 'img', src: 'fotos/Pantalla-de-Mamá-2.webp' },
-      { type: 'img', src: 'fotos/Pantalla-de-Mamá-3.webp' },
-      { type: 'video', src: 'videos/Pantalla-de-Mamá.mp4' },
-    ];
+    const SLIDES_MAMA = [
+  { type: 'img', src: 'fotos/Pantalla-de-Mama-1.webp' },
+  { type: 'img', src: 'fotos/Pantalla-de-Mama-2.webp' },
+  { type: 'img', src: 'fotos/Pantalla-de-Mama-3.webp' },
+  { type: 'videos', src: 'videos/Pantalla-de-Mama.mp4' },
+];
 
     document.querySelectorAll('.card').forEach(card => {
       const h3 = card.querySelector('h3');
@@ -2046,7 +2046,7 @@
       media.dataset.index = '0';
 
       const el = document.createElement('img');
-      el.src = 'fotos/Ventiladores.webp';
+      el.src = 'fotos/Ventiladores-1.webp';
       el.alt = 'Ventilador Velikka';
       el.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;transition:opacity .25s ease;';
       el.className = 'slide active';
@@ -2065,7 +2065,7 @@
       media.innerHTML = '';
       media.dataset.index = '0';
       const el = document.createElement('img');
-      el.src = 'fotos/Tendedero.webp';
+      el.src = 'fotos/Tendedero-1.webp';
       el.alt = 'Tendedero';
       el.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;transition:opacity .25s ease;';
       el.className = 'slide active';
