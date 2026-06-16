@@ -14,18 +14,18 @@
   ============================================================
   1. FOTOS: crea una carpeta "fotos" junto a este archivo y
      guarda tus imágenes con este nombre exacto:
-        fotos/<id-del-articulo>-1.jpg
-        fotos/<id-del-articulo>-2.jpg
-        fotos/<id-del-articulo>-3.jpg
+        fotos/<id-del-articulo>-1.webp
+        fotos/<id-del-articulo>-2.webp
+        fotos/<id-del-articulo>-3.webp
      (puedes usar .jpg, .png o .webp, solo cambia la extensión
-      en la lista "items" más abajo si no usas .jpg)
+      en la lista "items" más abajo si no usas .webp)
 
      Mientras no exista la foto, se muestra un recuadro que dice
      "Foto próximamente", así que puedes subir el sitio antes de
      tener todas las fotos listas.
 
      Para los PELUCHES cada uno tiene su propia foto y precio:
-     fotos/peluche-1-1.jpg, fotos/peluche-2-1.jpg, etc. Si tienes
+     fotos/peluche-1-1.webp, fotos/peluche-2-1.webp, etc. Si tienes
      más o menos de 6 peluches, agrega o quita líneas en el arreglo
      "peluches" (cada uno vale $30 o $50, tú decides).
 
@@ -1177,12 +1177,12 @@
        Si el precio es "por confirmar" (como Barra o Bocina),
        deja precioNum: null y se mostrará "a confirmar" en el carrito.
      - medidas / descripcion: deja "" para mostrar "próximamente"
-     - fotos: cuántas fotos (1, 2, 3...) busca fotos/<id>-N.jpg
+     - fotos: cuántas fotos (1, 2, 3...) busca fotos/<id>-N.webp
      - video: true solo para las pantallas, busca videos/<id>.mp4
      - estado: "disponible" o "vendido"
      ============================================================ */
   const items = [
-    { id: 'barra-bebidas',   categoria: 'sala',       titulo: 'Barra bebidas',               precio: '$3,800',             precioNum: 3800,  original: null,    medidas: '1.50 m largo · 1.02 m alto · 0.62 m profundidad', descripcion: 'Elegante carrito para bebidas con inserto de aluminio (mueble). La parte superior mide 0.31 m de alto y 0.25 m de profundidad; es desmontable, reforzada y tiene ruedas para fácil transportación.', fotos: 3, video: false, estado: 'disponible', stock: 1 },
+    { id: 'Barra-bebidas',   categoria: 'sala',       titulo: 'Barra bebidas',               precio: '$3,800',             precioNum: 3800,  original: null,    medidas: '1.50 m largo · 1.02 m alto · 0.62 m profundidad', descripcion: 'Elegante carrito para bebidas con inserto de aluminio (mueble). La parte superior mide 0.31 m de alto y 0.25 m de profundidad; es desmontable, reforzada y tiene ruedas para fácil transportación.', fotos: 3, video: false, estado: 'disponible', stock: 1 },
     { id: 'Mueble-para-TV',  categoria: 'sala',       titulo: 'Mueble para TV',              precio: '$600',               precioNum: 600,   original: null,    medidas: '', descripcion: '', fotos: 3, video: false, estado: 'disponible', stock: 1 },
     { id: 'Mesas-de-centro', categoria: 'sala',       titulo: 'Mesas de centro (las 3)',     precio: '$800 el set',         precioNum: 800,   original: null,    medidas: '', descripcion: 'Las 3 mesas se venden juntas por $800.', fotos: 3, video: false, estado: 'disponible', stock: 1 },
     { id: 'Escritorio',      categoria: 'oficina',    titulo: 'Escritorio',                  precio: '$1,200',             precioNum: 1200,  original: null,    medidas: '', descripcion: '', fotos: 4, video: false, estado: 'disponible', stock: 1 },
@@ -1204,7 +1204,7 @@
      PELUCHES
      - cada uno es independiente: pon "$30" o "$50" según el tamaño
      - agrega o quita líneas para que coincida con cuántos peluches
-       tienes (cada uno busca su foto en fotos/<id>-1.jpg)
+       tienes (cada uno busca su foto en fotos/<id>-1.webp)
      ============================================================ */
   const peluches = [
     { id: 'peluche-1',  precio: '$50', precioNum: 50 },
@@ -1875,9 +1875,9 @@
   // ---- CARRUSEL UNIFICADO: fotos + video Pantalla de Mamá JVC 32" ----
   (function embebeMama() {
     const SLIDES_MAMA = [
-      { type: 'img', src: 'fotos/Pantalla-de-Mamá-1.webp' },
-      { type: 'img', src: 'fotos/Pantalla-de-Mamá-2.webp' },
-      { type: 'img', src: 'fotos/Pantalla-de-Mamá-3.webp' },
+      { type: 'img', src: 'fotos/Pantalla-de-Mama-1.webp' },
+      { type: 'img', src: 'fotos/Pantalla-de-Mama-2.webp' },
+      { type: 'img', src: 'fotos/Pantalla-de-Mama-3.webp' },
       { type: 'video', src: 'videos/Pantalla-de-Mama_.mp4' },
     ];
 
