@@ -1552,18 +1552,29 @@
     media.className = 'media';
     media.dataset.index = '0';
 
-    for (let i = 1; i <= item.fotos; i++){
-      const img = document.createElement('img');
-      img.className = 'slide' + (i === 1 ? ' active' : '');
-      img.src = `fotos/${item.id}-${i}.webp`;
-      img.alt = `${item.titulo} - foto ${i}`;
-      img.loading = 'lazy';
-      img.onerror = function(){
-        this.onerror = null;
-        this.src = FOTO_PLACEHOLDER;
-      };
-      media.appendChild(img);
-    }
+    for (let i = 1; i <= item.fotos; i++) {
+
+  const img = document.createElement('img');
+
+  img.className = 'slide' + (i === 1 ? ' active' : '');
+
+  img.src =
+    item.fotos === 1
+      ? `fotos/${item.id}.webp`
+      : `fotos/${item.id}-${i}.webp`;
+
+  img.alt = `${item.titulo} - foto ${i}`;
+
+  img.loading = 'lazy';
+
+  img.onerror = function () {
+    this.onerror = null;
+    this.src = FOTO_PLACEHOLDER;
+  };
+
+  media.appendChild(img);
+
+}
 
     if (item.fotos > 1){
       const prev = document.createElement('button');
