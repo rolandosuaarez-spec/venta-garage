@@ -1184,7 +1184,6 @@
   const items = [
     { id: 'Barra-bebidas',   categoria: 'sala',       titulo: 'Barra bebidas',               precio: '$3,800',             precioNum: 3800,  original: null,    medidas: '1.50 m largo · 1.02 m alto · 0.62 m profundidad', descripcion: 'Elegante carrito para bebidas con inserto de aluminio (mueble). La parte superior mide 0.31 m de alto y 0.25 m de profundidad; es desmontable, reforzada y tiene ruedas para fácil transportación.', fotos: 3, video: false, estado: 'disponible', stock: 1 },
     { id: 'Mueble-para-TV',  categoria: 'sala',       titulo: 'Mueble para TV',              precio: '$600',               precioNum: 600,   original: null,    medidas: '', descripcion: '', fotos: 3, video: false, estado: 'disponible', stock: 1 },
-    { id: 'Mesas-de-centro', categoria: 'sala',       titulo: 'Mesas de centro (las 3)',     precio: '$800 el set',         precioNum: 800,   original: null,    medidas: '', descripcion: 'Las 3 mesas se venden juntas por $800.', fotos: 3, video: false, estado: 'disponible', stock: 1 },
     { id: 'Escritorio',      categoria: 'oficina',    titulo: 'Escritorio',                  precio: '$800',               precioNum: 800,   original: null,    medidas: '', descripcion: '', fotos: 4, video: false, estado: 'disponible', stock: 1 },
     { id: 'Computadora-de-escritorio', categoria: 'oficina', titulo: 'Computadora de escritorio', precio: '$2,000', precioNum: 2000, original: null, medidas: '', descripcion: '', fotos: 4, video: false, estado: 'disponible', stock: 1 },
     { id: 'Sillas-de-escritorio', categoria: 'oficina', titulo: 'Sillas de escritorio',      precio: '$600 c/u',           precioNum: 600,   original: null,    medidas: '', descripcion: '', fotos: 2, video: false, estado: 'disponible', stock: 2 },
@@ -1192,9 +1191,7 @@
     { id: 'Celulares',       categoria: 'electronica', titulo: 'Celulares',                  precio: '$3,000 c/u',         precioNum: 3000,  original: null,    medidas: '', descripcion: '', fotos: 5, video: false, estado: 'disponible', stock: 2 },
     { id: 'Lampara-de-pestanas', categoria: 'recamara', titulo: 'Lámpara de pestañas',       precio: '$1,000',             precioNum: 1000,  original: null,    medidas: '', descripcion: '', fotos: 6, video: false, estado: 'disponible', stock: 1 },
     { id: 'Lavadora',        categoria: 'hogar',      titulo: 'Lavadora Mabe 18 kg',         precio: '$2,500',             precioNum: 2500,  original: null,    medidas: '18 kg', descripcion: 'Lavadora automática Mabe 18 kg con tapa de cristal templado. Tecnología AquaSaver, múltiples programas automáticos: blanca, color, jeans, ropa de bebé, toallas y más. Control de temperatura, nivel de agua y centrifugado. En buen estado y funcionando perfectamente.', fotos: 4, video: false, estado: 'disponible', stock: 1 },
-    { id: 'Tendedero',       categoria: 'hogar',      titulo: 'Tendedero',                   precio: '$300',               precioNum: 300,   original: null,    medidas: '', descripcion: '', fotos: 1, video: false, estado: 'disponible', stock: 1 },
     { id: 'Ventiladores',    categoria: 'hogar',      titulo: 'Ventiladores Velikka',        precio: '$350 c/u',           precioNum: 350,   original: null,    medidas: '', descripcion: 'Ventiladores de pedestal marca Velikka, color negro. Base circular estable, altura regulable. Tenemos 4 disponibles, se venden por separado a $350 cada uno.', fotos: 1, video: false, estado: 'disponible', stock: 4 },
-    { id: 'Calefactor',      categoria: 'hogar',      titulo: 'Calefactor',                  precio: '$300',               precioNum: 300,   original: null,    medidas: '', descripcion: '', fotos: 2, video: false, estado: 'disponible', stock: 1 },
     { id: 'Cafetera-Ninja',  categoria: 'hogar',      titulo: 'Cafetera Ninja 2 en 1',       precio: '$1,850',             precioNum: 1850,  original: null,    medidas: '', descripcion: 'Ninja Pods & Grounds Specialty. Compatible con cápsulas K-Cup y café molido. Espumador de leche integrado. Tamaños de 6 oz (taza) hasta 24 oz (jarra de viaje). Incluye función de café helado. Potencia de 1550 W.', fotos: 3, video: false, estado: 'disponible', stock: 1 },
   ];
 
@@ -2063,23 +2060,6 @@
   })();
 
 
-  // ---- IMAGEN ÚNICA: Tendedero ----
-  (function embebeTendedero() {
-    document.querySelectorAll('.card').forEach(card => {
-      const h3 = card.querySelector('h3');
-      if (!h3 || !h3.textContent.includes('Tendedero')) return;
-      const media = card.querySelector('.media');
-      if (!media) return;
-      media.innerHTML = '';
-      media.dataset.index = '0';
-      const el = document.createElement('img');
-      el.src = 'fotos/Tendedero.webp';
-      el.alt = 'Tendedero';
-      el.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;transition:opacity .25s ease;';
-      el.className = 'slide active';
-      media.appendChild(el);
-    });
-  })();
   // ---- LIGHTBOX ----
   let lbSlides = [];
   let lbIdx = 0;
