@@ -1202,7 +1202,7 @@
     { id: 'Lampara-de-pestanas', categoria: 'recamara', titulo: 'Lámpara de pestañas',       precio: '$1,000',             precioNum: 1000,  original: null,    medidas: '', descripcion: '', fotos: 6, video: false, estado: 'disponible', stock: 1 },
     { id: 'Ventiladores',    categoria: 'hogar',      titulo: 'Ventiladores Velikka',        precio: '$350 c/u',           precioNum: 350,   original: null,    medidas: '', descripcion: 'Ventiladores de pedestal marca Velikka, color negro. Base circular estable, altura regulable. Tenemos 4 disponibles, se venden por separado a $350 cada uno.', fotos: 1, video: false, estado: 'disponible', stock: 4 },
     { id: 'Cafetera-Ninja',  categoria: 'hogar',      titulo: 'Cafetera Ninja 2 en 1',       precio: '$1,850',             precioNum: 1850,  original: null,    medidas: '', descripcion: 'Ninja Pods & Grounds Specialty. Compatible con cápsulas K-Cup y café molido. Espumador de leche integrado. Tamaños de 6 oz (taza) hasta 24 oz (jarra de viaje). Incluye función de café helado. Potencia de 1550 W.', fotos: 3, video: false, estado: 'disponible', stock: 1 },
-    { id: 'Cocina-estufa',   categoria: 'hogar',      titulo: 'Cocina + estufa + Campana',   precio: '$18,000',            precioNum: 18000, original: null,    medidas: '', descripcion: '', fotos: 4, video: false, estado: 'disponible', stock: 1 },
+    { id: 'Cocina-estufa',   categoria: 'hogar',      titulo: 'Cocina + estufa + Campana',   precio: '$18,000',            precioNum: 18000, original: null,    medidas: '', descripcion: '', fotos: 3, video: false, estado: 'disponible', stock: 1 },
     { id: 'Mesa-madera',     categoria: 'sala',       titulo: 'Mesa de madera',              precio: '$200',               precioNum: 200,   original: null,    medidas: '', descripcion: '', fotos: 1, video: false, estado: 'disponible', stock: 1 },
     { id: 'Comedero-perro',  categoria: 'hogar',      titulo: 'Comedero para perro',         precio: '$430',               precioNum: 430,   original: null,    medidas: '', descripcion: 'Solo se abrió y Mia ni lo pelo. En perfecto estado.', fotos: 1, video: false, estado: 'disponible', stock: 1 },
     { id: 'Baumanometro',    categoria: 'hogar',      titulo: 'Baumanómetro morado',         precio: '$350',               precioNum: 350,   original: null,    medidas: '', descripcion: '', fotos: 4, video: false, estado: 'disponible', stock: 1 },
@@ -1251,10 +1251,10 @@
     { id: 'bw-organigorras',    titulo: 'Ganchitos Organigorras 10 pzas', precio: '$90', precioNum: 90, descripcion: '', fotos: 1, estado: 'disponible' },
     { id: 'bw-piedra-imperial', titulo: 'Adherible piedra imperial',  precio: '$200',  precioNum: 200, descripcion: '', fotos: 1, estado: 'disponible' },
     { id: 'bw-flexi-tapas',     titulo: 'Flexi tapas de silicón',     precio: '$100',  precioNum: 100, descripcion: '', fotos: 1, estado: 'disponible' },
-    { id: 'bw-bascula',         titulo: 'Báscula',                    precio: '$200',  precioNum: 200, descripcion: '', fotos: 4, estado: 'disponible' },
+    { id: 'bw-bascula',         titulo: 'Báscula',                    precio: '$200',  precioNum: 200, descripcion: '', fotos: 2, estado: 'disponible' },
     { id: 'bw-tallador',        titulo: 'Tallador',                   precio: '$90',   precioNum: 90,  descripcion: '', fotos: 1, estado: 'disponible' },
     { id: 'bw-carrito',         titulo: 'Carrito betterware',         precio: '$800',  precioNum: 800, descripcion: '', fotos: 1, estado: 'disponible' },
-    { id: 'bw-lampara-solar',   titulo: 'Lámpara con panel solar',    precio: '$100',  precioNum: 100, descripcion: '', fotos: 4, estado: 'disponible' },
+    { id: 'bw-lampara-solar',   titulo: 'Lámpara con panel solar',    precio: '$100',  precioNum: 100, descripcion: '', fotos: 3, estado: 'disponible' },
   ];
 
   function crearTarjetaBW(item) {
@@ -1357,6 +1357,14 @@
     info.appendChild(h3);
     info.appendChild(desc);
     info.appendChild(footer);
+
+    // ---- botón de lupa para lightbox ----
+    const btnLupaBW = document.createElement('button');
+    btnLupaBW.className = 'btn-agrandar';
+    btnLupaBW.setAttribute('aria-label', 'Ver fotos en grande');
+    btnLupaBW.innerHTML = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>`;
+    btnLupaBW.onclick = () => abrirLightbox(item, 0);
+    media.appendChild(btnLupaBW);
 
     card.appendChild(media);
     card.appendChild(info);
@@ -2028,6 +2036,17 @@
       el.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;transition:opacity .25s ease;';
       el.className = 'slide active';
       media.appendChild(el);
+
+      // lupa lightbox para Ventiladores
+      const itemVent = items.find(it => it.id === 'Ventiladores');
+      if (itemVent) {
+        const btnLupaVent = document.createElement('button');
+        btnLupaVent.className = 'btn-agrandar';
+        btnLupaVent.setAttribute('aria-label', 'Ver fotos en grande');
+        btnLupaVent.innerHTML = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>`;
+        btnLupaVent.onclick = () => abrirLightbox(itemVent, 0);
+        media.appendChild(btnLupaVent);
+      }
     });
   })();
 
@@ -2041,7 +2060,7 @@
     // Leer las fotos reales desde el DOM (src ya resuelto por el carrusel)
     const card = document.querySelector(`[data-id="${item.id}"]`);
     if (card) {
-      const imgs = card.querySelectorAll('.slide img');
+      const imgs = card.querySelectorAll('img.slide, .slide img');
       imgs.forEach(img => {
         if (img.src && !img.src.includes('data:image')) {
           lbSlides.push({ type: 'img', src: img.src });
