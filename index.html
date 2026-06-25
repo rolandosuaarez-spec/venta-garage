@@ -186,7 +186,7 @@
   /* ===================== CATÁLOGO ===================== */
   .catalogo{
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(270px, 100%), 1fr));
     gap: 1.6rem;
     padding: 1rem clamp(1rem, 5vw, 3rem) 3rem;
     max-width: 1280px;
@@ -467,7 +467,7 @@
 
   /* ===================== GALERÍA ===================== */
   .catalogo {
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
   }
 
   .card .media {
@@ -917,7 +917,7 @@
     /* Una columna */
     .catalogo {
       grid-template-columns: 1fr;
-      gap: 1.2rem;
+      gap: 1rem;
       padding: .75rem clamp(.75rem, 4vw, 1.25rem) 2rem;
     }
 
@@ -1109,11 +1109,22 @@
     <button class="filtro-btn" data-categoria="recamara">Recámara</button>
     <button class="filtro-btn" data-categoria="electronica">Electrónica</button>
     <button class="filtro-btn" data-categoria="hogar">Hogar</button>
+    <button class="filtro-btn" data-categoria="betterware">Betterware</button>
   </nav>
 
   <main class="catalogo" id="catalogo">
     <!-- las tarjetas se generan automáticamente desde "items" -->
   </main>
+
+  <section class="peluches-wrap" id="betterware-section">
+    <div class="peluches-header">
+      <h2>Cosas de Betterware</h2>
+      <p>Productos Betterware, la mayoría sin uso o casi nuevos.</p>
+    </div>
+    <div class="catalogo" id="catalogo-betterware">
+      <!-- se generan automáticamente desde "itemsBetterware" -->
+    </div>
+  </section>
 
   <section class="peluches-wrap">
     <div class="peluches-header">
@@ -1190,9 +1201,13 @@
     { id: 'Pantalla-de-Mama', categoria: 'electronica', titulo: 'Smart TV 32" JVC', precio: '$1,500',            precioNum: 1500,  original: null,    medidas: '32 pulgadas', descripcion: 'JVC 32" Smart TV. Tiene App Store, Netflix, Deportes, Películas, Música y más. Incluye soporte de pared. En buen estado.', fotos: 3, video: false, estado: 'disponible', stock: 1 },
     { id: 'Celulares',       categoria: 'electronica', titulo: 'Celulares',                  precio: '$3,000 c/u',         precioNum: 3000,  original: null,    medidas: '', descripcion: '', fotos: 5, video: false, estado: 'disponible', stock: 2 },
     { id: 'Lampara-de-pestanas', categoria: 'recamara', titulo: 'Lámpara de pestañas',       precio: '$1,000',             precioNum: 1000,  original: null,    medidas: '', descripcion: '', fotos: 6, video: false, estado: 'disponible', stock: 1 },
-    { id: 'Lavadora',        categoria: 'hogar',      titulo: 'Lavadora Mabe 18 kg',         precio: '$2,500',             precioNum: 2500,  original: null,    medidas: '18 kg', descripcion: 'Lavadora automática Mabe 18 kg con tapa de cristal templado. Tecnología AquaSaver, múltiples programas automáticos: blanca, color, jeans, ropa de bebé, toallas y más. Control de temperatura, nivel de agua y centrifugado. En buen estado y funcionando perfectamente.', fotos: 4, video: false, estado: 'disponible', stock: 1 },
     { id: 'Ventiladores',    categoria: 'hogar',      titulo: 'Ventiladores Velikka',        precio: '$350 c/u',           precioNum: 350,   original: null,    medidas: '', descripcion: 'Ventiladores de pedestal marca Velikka, color negro. Base circular estable, altura regulable. Tenemos 4 disponibles, se venden por separado a $350 cada uno.', fotos: 1, video: false, estado: 'disponible', stock: 4 },
     { id: 'Cafetera-Ninja',  categoria: 'hogar',      titulo: 'Cafetera Ninja 2 en 1',       precio: '$1,850',             precioNum: 1850,  original: null,    medidas: '', descripcion: 'Ninja Pods & Grounds Specialty. Compatible con cápsulas K-Cup y café molido. Espumador de leche integrado. Tamaños de 6 oz (taza) hasta 24 oz (jarra de viaje). Incluye función de café helado. Potencia de 1550 W.', fotos: 3, video: false, estado: 'disponible', stock: 1 },
+    { id: 'Cocina-estufa',   categoria: 'hogar',      titulo: 'Cocina + estufa + Campana',   precio: '$18,000',            precioNum: 18000, original: null,    medidas: '', descripcion: '', fotos: 1, video: false, estado: 'disponible', stock: 1 },
+    { id: 'Mesa-madera',     categoria: 'sala',       titulo: 'Mesa de madera',              precio: '$200',               precioNum: 200,   original: null,    medidas: '', descripcion: '', fotos: 1, video: false, estado: 'disponible', stock: 1 },
+    { id: 'Comedero-perro',  categoria: 'hogar',      titulo: 'Comedero para perro',         precio: '$430',               precioNum: 430,   original: null,    medidas: '', descripcion: 'Solo se abrió y Mia ni lo pelo. En perfecto estado.', fotos: 1, video: false, estado: 'disponible', stock: 1 },
+    { id: 'Baumanometro',    categoria: 'hogar',      titulo: 'Baumanómetro morado',         precio: '$350',               precioNum: 350,   original: null,    medidas: '', descripcion: '', fotos: 1, video: false, estado: 'disponible', stock: 1 },
+    { id: 'Lentes-led-lupa', categoria: 'hogar',      titulo: 'Lentes LED con lupa',         precio: '$200',               precioNum: 200,   original: null,    medidas: '', descripcion: '', fotos: 1, video: false, estado: 'disponible', stock: 1 },
   ];
 
   /* ============================================================
@@ -1202,7 +1217,6 @@
        tienes (cada uno busca su foto en fotos/<id>-1.jpg)
      ============================================================ */
   const peluches = [
-    { id: 'peluche-1',  precio: '$50', precioNum: 50 },
     { id: 'peluche-2',  precio: '$50', precioNum: 50 },
     { id: 'peluche-3',  precio: '$50', precioNum: 50 },
     { id: 'peluche-4',  precio: '$50', precioNum: 50 },
@@ -1215,21 +1229,95 @@
     { id: 'peluche-11', precio: '$50', precioNum: 50 },
     { id: 'peluche-12', precio: '$50', precioNum: 50 },
     { id: 'peluche-13', precio: '$50', precioNum: 50 },
-    { id: 'peluche-14', precio: '$50', precioNum: 50 },
-    { id: 'peluche-15', precio: '$50', precioNum: 50 },
     { id: 'peluche-16', precio: '$50', precioNum: 50 },
     { id: 'peluche-17', precio: '$50', precioNum: 50 },
     { id: 'peluche-18', precio: '$50', precioNum: 50 },
     { id: 'peluche-19', precio: '$50', precioNum: 50 },
-    { id: 'peluche-20', precio: '$50', precioNum: 50 },
     { id: 'peluche-21', precio: '$50', precioNum: 50 },
     { id: 'peluche-22', precio: '$50', precioNum: 50 },
     { id: 'peluche-23', precio: '$50', precioNum: 50 },
     { id: 'peluche-24', precio: '$50', precioNum: 50 },
-    { id: 'peluche-25', precio: '$50', precioNum: 50 },
     { id: 'peluche-26', precio: '$50', precioNum: 50 },
     { id: 'peluche-27', precio: '$50', precioNum: 50 },
   ];
+
+  /* ============================================================
+     COSAS DE BETTERWARE
+     ============================================================ */
+  const itemsBetterware = [
+    { id: 'bw-vaporera',        titulo: 'Vaporera Resisit',           precio: '$80',   precioNum: 80,  descripcion: '', fotos: 1, estado: 'disponible' },
+    { id: 'bw-organi-cubiertos',titulo: 'Organi cubiertos',           precio: '$85',   precioNum: 85,  descripcion: '', fotos: 1, estado: 'disponible' },
+    { id: 'bw-botella-1lt',     titulo: 'Botella de 1 Lt',            precio: '$90',   precioNum: 90,  descripcion: '', fotos: 1, estado: 'disponible' },
+    { id: 'bw-cajon-org',       titulo: 'Cajón organizador',          precio: '$50',   precioNum: 50,  descripcion: '', fotos: 1, estado: 'disponible' },
+    { id: 'bw-organigorras',    titulo: 'Ganchitos Organigorras 10 pzas', precio: '$90', precioNum: 90, descripcion: '', fotos: 1, estado: 'disponible' },
+    { id: 'bw-piedra-imperial', titulo: 'Adherible piedra imperial',  precio: '$200',  precioNum: 200, descripcion: '', fotos: 1, estado: 'disponible' },
+    { id: 'bw-flexi-tapas',     titulo: 'Flexi tapas de silicón',     precio: '$100',  precioNum: 100, descripcion: '', fotos: 1, estado: 'disponible' },
+    { id: 'bw-bascula',         titulo: 'Báscula',                    precio: '$200',  precioNum: 200, descripcion: '', fotos: 1, estado: 'disponible' },
+    { id: 'bw-tallador',        titulo: 'Tallador',                   precio: '$90',   precioNum: 90,  descripcion: '', fotos: 1, estado: 'disponible' },
+    { id: 'bw-carrito',         titulo: 'Carrito betterware',         precio: '$800',  precioNum: 800, descripcion: '', fotos: 1, estado: 'disponible' },
+  ];
+
+  function crearTarjetaBW(item) {
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.dataset.id = item.id;
+    card.dataset.categoria = 'betterware';
+
+    const media = document.createElement('div');
+    media.className = 'media';
+    media.dataset.index = '0';
+
+    const img = document.createElement('img');
+    img.src = `fotos/${item.id}-1.webp`;
+    img.alt = item.titulo;
+    img.className = 'slide active';
+    img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;transition:opacity .25s ease;';
+    img.onerror = function(){ this.onerror=null; this.src = FOTO_PLACEHOLDER; };
+    media.appendChild(img);
+
+    const info = document.createElement('div');
+    info.className = 'info';
+
+    const h3 = document.createElement('h3');
+    h3.textContent = item.titulo;
+
+    const desc = document.createElement('p');
+    desc.className = 'descripcion' + (item.descripcion ? '' : ' placeholder');
+    desc.textContent = item.descripcion || 'Descripción próximamente.';
+
+    const footer = document.createElement('div');
+    footer.className = 'card-footer';
+
+    const estado = document.createElement('span');
+    estado.className = 'estado';
+    estado.textContent = 'Disponible';
+    footer.appendChild(estado);
+
+    const tag = document.createElement('div');
+    tag.className = 'price-tag';
+    tag.textContent = item.precio;
+    footer.appendChild(tag);
+
+    const btnAdd = document.createElement('button');
+    btnAdd.type = 'button';
+    btnAdd.className = 'btn-add';
+    btnAdd.textContent = 'Agregar al carrito';
+    btnAdd.onclick = () => {
+      agregarAlCarrito(item.id, item.titulo, item.precio, item.precioNum);
+      btnAdd.textContent = 'Agregado ✓';
+      btnAdd.classList.add('added');
+      setTimeout(() => { btnAdd.textContent = 'Agregar al carrito'; btnAdd.classList.remove('added'); }, 1100);
+    };
+    footer.appendChild(btnAdd);
+
+    info.appendChild(h3);
+    info.appendChild(desc);
+    info.appendChild(footer);
+
+    card.appendChild(media);
+    card.appendChild(info);
+    return card;
+  }
 
   function placeholder(texto){
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
@@ -1775,6 +1863,9 @@
   const catalogo = document.getElementById('catalogo');
   items.forEach(item => catalogo.appendChild(crearTarjeta(item)));
 
+  const catalogoBW = document.getElementById('catalogo-betterware');
+  itemsBetterware.forEach(item => catalogoBW.appendChild(crearTarjetaBW(item)));
+
   const pelucheGrid = document.getElementById('peluches');
   peluches.forEach(p => pelucheGrid.appendChild(crearPelucheCard(p)));
 
@@ -1969,75 +2060,6 @@
     });
   })();
 
-  // ---- CARRUSEL: Lavadora Mabe 18 kg (4 fotos .webp) ----
-  (function embebeLavadora() {
-    const SLIDES_LAV = [
-      { src: 'fotos/Lavadora-1.webp' },
-      { src: 'fotos/Lavadora-2.webp' },
-      { src: 'fotos/Lavadora-3.webp' },
-      { src: 'fotos/Lavadora-4.webp' },
-    ];
-
-    document.querySelectorAll('.card').forEach(card => {
-      const h3 = card.querySelector('h3');
-      if (!h3 || !h3.textContent.includes('Lavadora Mabe')) return;
-
-      const media = card.querySelector('.media');
-      if (!media) return;
-
-      media.innerHTML = '';
-      media.dataset.index = '0';
-
-      SLIDES_LAV.forEach((s, i) => {
-        const el = document.createElement('img');
-        el.src = s.src;
-        el.alt = 'Lavadora Mabe 18kg foto ' + (i+1);
-        el.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .25s ease;';
-        el.className = 'slide' + (i === 0 ? ' active' : '');
-        if (i === 0) el.style.opacity = '1';
-        media.appendChild(el);
-      });
-
-      function goToLav(idx) {
-        const all = media.querySelectorAll('.slide');
-        const allDots = media.querySelectorAll('.dot');
-        const prevIdx = parseInt(media.dataset.index);
-        const prevEl = all[prevIdx];
-        if (prevEl) { prevEl.style.opacity = '0'; prevEl.classList.remove('active'); }
-        const cur = all[idx];
-        if (cur) { cur.style.opacity = '1'; cur.classList.add('active'); }
-        allDots.forEach((d,i) => d.classList.toggle('active', i === idx));
-        media.dataset.index = idx;
-      }
-
-      const prevBtn = document.createElement('button');
-      prevBtn.className = 'nav-btn nav-prev';
-      prevBtn.innerHTML = '&#8249;';
-      prevBtn.setAttribute('aria-label','Anterior');
-      prevBtn.onclick = () => { const n = (parseInt(media.dataset.index) - 1 + SLIDES_LAV.length) % SLIDES_LAV.length; goToLav(n); };
-
-      const nextBtn = document.createElement('button');
-      nextBtn.className = 'nav-btn nav-next';
-      nextBtn.innerHTML = '&#8250;';
-      nextBtn.setAttribute('aria-label','Siguiente');
-      nextBtn.onclick = () => { const n = (parseInt(media.dataset.index) + 1) % SLIDES_LAV.length; goToLav(n); };
-
-      const dots = document.createElement('div');
-      dots.className = 'dots';
-      SLIDES_LAV.forEach((_, i) => {
-        const d = document.createElement('button');
-        d.className = 'dot' + (i === 0 ? ' active' : '');
-        d.setAttribute('aria-label', 'Foto ' + (i+1));
-        d.onclick = () => goToLav(i);
-        dots.appendChild(d);
-      });
-
-      media.appendChild(prevBtn);
-      media.appendChild(nextBtn);
-      media.appendChild(dots);
-    });
-  })();
-
   // ---- CARRUSEL: Ventiladores Velikka (1 foto .webp) ----
   (function embebeVentiladores() {
     document.querySelectorAll('.card').forEach(card => {
@@ -2145,9 +2167,15 @@
       document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const cat = btn.dataset.categoria;
-      document.querySelectorAll('.card').forEach(card => {
+      // Filtrar catálogo principal
+      document.querySelectorAll('#catalogo .card').forEach(card => {
         card.style.display = (cat === 'todos' || card.dataset.categoria === cat) ? '' : 'none';
       });
+      // Mostrar/ocultar sección betterware
+      const bwSection = document.getElementById('betterware-section');
+      if (bwSection) {
+        bwSection.style.display = (cat === 'todos' || cat === 'betterware') ? '' : 'none';
+      }
     });
   });
 
