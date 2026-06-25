@@ -1198,7 +1198,6 @@
     { id: 'Escritorio',      categoria: 'oficina',    titulo: 'Escritorio',                  precio: '$800',               precioNum: 800,   original: null,    medidas: '', descripcion: '', fotos: 4, video: false, estado: 'disponible', stock: 1 },
     { id: 'Computadora-de-escritorio', categoria: 'oficina', titulo: 'Computadora de escritorio', precio: '$2,000', precioNum: 2000, original: null, medidas: '', descripcion: '', fotos: 4, video: false, estado: 'disponible', stock: 1 },
     { id: 'Sillas-de-escritorio', categoria: 'oficina', titulo: 'Sillas de escritorio',      precio: '$600 c/u',           precioNum: 600,   original: null,    medidas: '', descripcion: '', fotos: 2, video: false, estado: 'disponible', stock: 2 },
-    { id: 'Pantalla-de-Mama', categoria: 'electronica', titulo: 'Smart TV 32" JVC', precio: '$1,500',            precioNum: 1500,  original: null,    medidas: '32 pulgadas', descripcion: 'JVC 32" Smart TV. Tiene App Store, Netflix, Deportes, Películas, Música y más. Incluye soporte de pared. En buen estado.', fotos: 3, video: false, estado: 'disponible', stock: 1 },
     { id: 'Celulares',       categoria: 'electronica', titulo: 'Celulares',                  precio: '$3,000 c/u',         precioNum: 3000,  original: null,    medidas: '', descripcion: '', fotos: 5, video: false, estado: 'disponible', stock: 2 },
     { id: 'Lampara-de-pestanas', categoria: 'recamara', titulo: 'Lámpara de pestañas',       precio: '$1,000',             precioNum: 1000,  original: null,    medidas: '', descripcion: '', fotos: 6, video: false, estado: 'disponible', stock: 1 },
     { id: 'Ventiladores',    categoria: 'hogar',      titulo: 'Ventiladores Velikka',        precio: '$350 c/u',           precioNum: 350,   original: null,    medidas: '', descripcion: 'Ventiladores de pedestal marca Velikka, color negro. Base circular estable, altura regulable. Tenemos 4 disponibles, se venden por separado a $350 cada uno.', fotos: 1, video: false, estado: 'disponible', stock: 4 },
@@ -1963,97 +1962,6 @@
 
       media.appendChild(prev);
       media.appendChild(next);
-      media.appendChild(dots);
-    });
-  })();
-
-  // ---- CARRUSEL UNIFICADO: fotos + video Pantalla de Mamá JVC 32" ----
-  (function embebeMama() {
-    const SLIDES_MAMA = [
-  { type: 'img', src: 'fotos/Pantalla-de-Mama-1.webp' },
-  { type: 'img', src: 'fotos/Pantalla-de-Mama-2.webp' },
-  { type: 'img', src: 'fotos/Pantalla-de-Mama-3.webp' },
-  { type: 'videos', src: 'videos/Pantalla-de-Mama.mp4' },
-];
-
-    document.querySelectorAll('.card').forEach(card => {
-      const h3 = card.querySelector('h3');
-      if (!h3 || !h3.textContent.includes('Smart TV 32" JVC')) return;
-
-      const media = card.querySelector('.media');
-      if (!media) return;
-
-      media.innerHTML = '';
-      media.dataset.index = '0';
-
-      SLIDES_MAMA.forEach((s, i) => {
-        let el;
-        if (s.type === 'img') {
-          el = document.createElement('img');
-          el.src = s.src;
-          el.alt = 'Pantalla JVC 32" foto ' + (i+1);
-          el.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .25s ease;';
-        } else {
-          const wrap = document.createElement('div');
-          wrap.style.cssText = 'position:absolute;inset:0;opacity:0;transition:opacity .25s ease;background:#000;';
-          const vid = document.createElement('video');
-          vid.controls = true;
-          vid.preload = 'metadata';
-          vid.muted = true;
-          vid.style.cssText = 'width:100%;height:100%;object-fit:contain;';
-          const src = document.createElement('source');
-          src.src = s.src;
-          src.type = 'video/mp4';
-          vid.appendChild(src);
-          wrap.appendChild(vid);
-          el = wrap;
-        }
-        el.className = 'slide' + (i === 0 ? ' active' : '');
-        if (i === 0) el.style.opacity = '1';
-        media.appendChild(el);
-      });
-
-      function goToMama(idx) {
-        const all = media.querySelectorAll('.slide');
-        const allDots = media.querySelectorAll('.dot');
-        const prevIdx = parseInt(media.dataset.index);
-        const prevEl = all[prevIdx];
-        if (prevEl) {
-          const vid = prevEl.querySelector('video');
-          if (vid) vid.pause();
-          prevEl.style.opacity = '0';
-          prevEl.classList.remove('active');
-        }
-        const cur = all[idx];
-        if (cur) { cur.style.opacity = '1'; cur.classList.add('active'); }
-        allDots.forEach((d,i) => d.classList.toggle('active', i === idx));
-        media.dataset.index = idx;
-      }
-
-      const prevBtn = document.createElement('button');
-      prevBtn.className = 'nav-btn nav-prev';
-      prevBtn.innerHTML = '&#8249;';
-      prevBtn.setAttribute('aria-label','Anterior');
-      prevBtn.onclick = () => { const n = (parseInt(media.dataset.index) - 1 + SLIDES_MAMA.length) % SLIDES_MAMA.length; goToMama(n); };
-
-      const nextBtn = document.createElement('button');
-      nextBtn.className = 'nav-btn nav-next';
-      nextBtn.innerHTML = '&#8250;';
-      nextBtn.setAttribute('aria-label','Siguiente');
-      nextBtn.onclick = () => { const n = (parseInt(media.dataset.index) + 1) % SLIDES_MAMA.length; goToMama(n); };
-
-      const dots = document.createElement('div');
-      dots.className = 'dots';
-      SLIDES_MAMA.forEach((_, i) => {
-        const d = document.createElement('button');
-        d.className = 'dot' + (i === 0 ? ' active' : '');
-        d.setAttribute('aria-label', i === 3 ? 'Ver video' : 'Foto ' + (i+1));
-        d.onclick = () => goToMama(i);
-        dots.appendChild(d);
-      });
-
-      media.appendChild(prevBtn);
-      media.appendChild(nextBtn);
       media.appendChild(dots);
     });
   })();
