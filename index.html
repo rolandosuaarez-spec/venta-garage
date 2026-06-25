@@ -1202,7 +1202,7 @@
     { id: 'Lampara-de-pestanas', categoria: 'recamara', titulo: 'Lámpara de pestañas',       precio: '$1,000',             precioNum: 1000,  original: null,    medidas: '', descripcion: '', fotos: 6, video: false, estado: 'disponible', stock: 1 },
     { id: 'Ventiladores',    categoria: 'hogar',      titulo: 'Ventiladores Velikka',        precio: '$350 c/u',           precioNum: 350,   original: null,    medidas: '', descripcion: 'Ventiladores de pedestal marca Velikka, color negro. Base circular estable, altura regulable. Tenemos 4 disponibles, se venden por separado a $350 cada uno.', fotos: 1, video: false, estado: 'disponible', stock: 4 },
     { id: 'Cafetera-Ninja',  categoria: 'hogar',      titulo: 'Cafetera Ninja 2 en 1',       precio: '$1,850',             precioNum: 1850,  original: null,    medidas: '', descripcion: 'Ninja Pods & Grounds Specialty. Compatible con cápsulas K-Cup y café molido. Espumador de leche integrado. Tamaños de 6 oz (taza) hasta 24 oz (jarra de viaje). Incluye función de café helado. Potencia de 1550 W.', fotos: 3, video: false, estado: 'disponible', stock: 1 },
-    { id: 'Cocina-estufa',   categoria: 'hogar',      titulo: 'Cocina + estufa + Campana',   precio: '$18,000',            precioNum: 18000, original: null,    medidas: '', descripcion: '', fotos: 1, video: false, estado: 'disponible', stock: 1 },
+    { id: 'Cocina-estufa',   categoria: 'hogar',      titulo: 'Cocina + estufa + Campana',   precio: '$18,000',            precioNum: 18000, original: null,    medidas: '', descripcion: '', fotos: 4, video: false, estado: 'disponible', stock: 1 },
     { id: 'Mesa-madera',     categoria: 'sala',       titulo: 'Mesa de madera',              precio: '$200',               precioNum: 200,   original: null,    medidas: '', descripcion: '', fotos: 1, video: false, estado: 'disponible', stock: 1 },
     { id: 'Comedero-perro',  categoria: 'hogar',      titulo: 'Comedero para perro',         precio: '$430',               precioNum: 430,   original: null,    medidas: '', descripcion: 'Solo se abrió y Mia ni lo pelo. En perfecto estado.', fotos: 1, video: false, estado: 'disponible', stock: 1 },
     { id: 'Baumanometro',    categoria: 'hogar',      titulo: 'Baumanómetro morado',         precio: '$350',               precioNum: 350,   original: null,    medidas: '', descripcion: '', fotos: 4, video: false, estado: 'disponible', stock: 1 },
@@ -1251,10 +1251,10 @@
     { id: 'bw-organigorras',    titulo: 'Ganchitos Organigorras 10 pzas', precio: '$90', precioNum: 90, descripcion: '', fotos: 1, estado: 'disponible' },
     { id: 'bw-piedra-imperial', titulo: 'Adherible piedra imperial',  precio: '$200',  precioNum: 200, descripcion: '', fotos: 1, estado: 'disponible' },
     { id: 'bw-flexi-tapas',     titulo: 'Flexi tapas de silicón',     precio: '$100',  precioNum: 100, descripcion: '', fotos: 1, estado: 'disponible' },
-    { id: 'bw-bascula',         titulo: 'Báscula',                    precio: '$200',  precioNum: 200, descripcion: '', fotos: 1, estado: 'disponible' },
+    { id: 'bw-bascula',         titulo: 'Báscula',                    precio: '$200',  precioNum: 200, descripcion: '', fotos: 4, estado: 'disponible' },
     { id: 'bw-tallador',        titulo: 'Tallador',                   precio: '$90',   precioNum: 90,  descripcion: '', fotos: 1, estado: 'disponible' },
     { id: 'bw-carrito',         titulo: 'Carrito betterware',         precio: '$800',  precioNum: 800, descripcion: '', fotos: 1, estado: 'disponible' },
-    { id: 'bw-lampara-solar',   titulo: 'Lámpara con panel solar',    precio: '$100',  precioNum: 100, descripcion: '', fotos: 1, estado: 'disponible' },
+    { id: 'bw-lampara-solar',   titulo: 'Lámpara con panel solar',    precio: '$100',  precioNum: 100, descripcion: '', fotos: 4, estado: 'disponible' },
   ];
 
   function crearTarjetaBW(item) {
@@ -1267,13 +1267,57 @@
     media.className = 'media';
     media.dataset.index = '0';
 
-    const img = document.createElement('img');
-    img.src = `fotos/${item.id}-1.webp`;
-    img.alt = item.titulo;
-    img.className = 'slide active';
-    img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;transition:opacity .25s ease;';
-    img.onerror = function(){ this.onerror=null; this.src = FOTO_PLACEHOLDER; };
-    media.appendChild(img);
+    // Crear slides para todas las fotos
+    const totalFotosBW = item.fotos || 1;
+    for (let i = 1; i <= totalFotosBW; i++) {
+      const img = document.createElement('img');
+      img.src = `fotos/${item.id}-${i}.webp`;
+      img.alt = `${item.titulo} foto ${i}`;
+      img.className = 'slide' + (i === 1 ? ' active' : '');
+      img.style.cssText = `position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:${i === 1 ? '1' : '0'};transition:opacity .25s ease;`;
+      img.onerror = function(){ this.onerror=null; this.src = FOTO_PLACEHOLDER; };
+      media.appendChild(img);
+    }
+
+    // Carrusel solo si hay más de una foto
+    if (totalFotosBW > 1) {
+      function goToBW(idx) {
+        const all = media.querySelectorAll('.slide');
+        const allDots = media.querySelectorAll('.dot');
+        const prevIdx = parseInt(media.dataset.index);
+        if (all[prevIdx]) { all[prevIdx].style.opacity = '0'; all[prevIdx].classList.remove('active'); }
+        if (all[idx])     { all[idx].style.opacity  = '1';    all[idx].classList.add('active');       }
+        allDots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        media.dataset.index = idx;
+      }
+
+      const btnPrevBW = document.createElement('button');
+      btnPrevBW.className = 'nav-btn nav-prev';
+      btnPrevBW.innerHTML = '&#8249;';
+      btnPrevBW.setAttribute('aria-label', 'Anterior');
+      btnPrevBW.onclick = (e) => { e.stopPropagation(); const n = (parseInt(media.dataset.index) - 1 + totalFotosBW) % totalFotosBW; goToBW(n); };
+
+      const btnNextBW = document.createElement('button');
+      btnNextBW.className = 'nav-btn nav-next';
+      btnNextBW.innerHTML = '&#8250;';
+      btnNextBW.setAttribute('aria-label', 'Siguiente');
+      btnNextBW.onclick = (e) => { e.stopPropagation(); const n = (parseInt(media.dataset.index) + 1) % totalFotosBW; goToBW(n); };
+
+      const dotsBW = document.createElement('div');
+      dotsBW.className = 'dots';
+      for (let i = 0; i < totalFotosBW; i++) {
+        const d = document.createElement('button');
+        d.className = 'dot' + (i === 0 ? ' active' : '');
+        d.setAttribute('aria-label', 'Foto ' + (i + 1));
+        const iCopy = i;
+        d.onclick = (e) => { e.stopPropagation(); goToBW(iCopy); };
+        dotsBW.appendChild(d);
+      }
+
+      media.appendChild(btnPrevBW);
+      media.appendChild(btnNextBW);
+      media.appendChild(dotsBW);
+    }
 
     const info = document.createElement('div');
     info.className = 'info';
